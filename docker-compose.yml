@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: "SearchAPI/Dockerfile"
+    ports:
+      - 9000:80
+    volumes:
+      - C:/Users/Hlynu/OneDrive/Desktop/DoLSearchEngine:/data
+  web:
+    build:
+      context: .
+      dockerfile: "WebSearch/Dockerfile"
+    ports:
+      - 9001:80
+volumes:
+  data:
