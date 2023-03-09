@@ -11,4 +11,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\ConsoleSearch\ConsoleSearch.csproj" />
+    <ProjectReference Include="..\Indexer\Indexer.csproj" />
+    <ProjectReference Include="..\SearchAPI\SearchAPI.csproj" />
+    <ProjectReference Include="..\WebSearch\WebSearch.csproj" />
+  </ItemGroup>
+
 </Project>
