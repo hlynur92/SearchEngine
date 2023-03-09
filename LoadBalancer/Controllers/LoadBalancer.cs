@@ -1,4 +1,6 @@
-﻿namespace SearchAPI.LoadBlancer
+﻿using LoadBalancer.LoadBlancer;
+
+namespace LoadBalancer.Controllers
 {
     public class LoadBalancer : ILoadBalancer
     {

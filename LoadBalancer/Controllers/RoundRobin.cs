@@ -1,6 +1,8 @@
-﻿namespace SearchAPI.LoadBlancer
+﻿using LoadBalancer.LoadBlancer;
+
+namespace LoadBalancer.Controllers
 {
-    public class LoadBalancerStrategy : ILoadBalancerStrategy
+    public class RoundRobin : ILoadBalancerStrategy
     {
         public string NextService(List<string> services)
         {
