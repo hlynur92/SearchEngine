@@ -30,5 +30,11 @@ namespace LoadBalancer.Controllers
 
             return result;
         }
+
+        [HttpPost]
+        public string registerService(string service)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

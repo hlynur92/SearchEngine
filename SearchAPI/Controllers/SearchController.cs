@@ -1,12 +1,11 @@
 ﻿using ConsoleSearch;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Common;
 
 namespace SearchAPI.Controllers
 {
     [ApiController]
-    [Microsoft.AspNetCore.Mvc.Route("[controller]")]
+    [Route("[controller]")]
     public class SearchController : ControllerBase
     {
         [HttpGet]
