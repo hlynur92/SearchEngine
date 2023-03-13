@@ -1,19 +1,23 @@
-version: "3.9"
+version: '3.4'
 
 services:
-  api:
+  loadbalancer:
+    image: ${DOCKER_REGISTRY-}loadbalancer
     build:
       context: .
-      dockerfile: "SearchAPI/Dockerfile"
-    ports:
-      - 9000:80
+      dockerfile: LoadBalancer/Dockerfile
+
+  searchapi:
+    image: ${DOCKER_REGISTRY-}searchapi
+    build:
+      context: .
+      dockerfile: SearchAPI/Dockerfile
     volumes:
-      - C:/Users/Hlynu/OneDrive/Desktop/DoLSearchEngine:/data
-  web:
+      - D:/Main/DockerVolumes:/data
+
+  websearch:
+    image: ${DOCKER_REGISTRY-}websearch
     build:
       context: .
-      dockerfile: "WebSearch/Dockerfile"
-    ports:
-      - 9001:80
-volumes:
-  data:
+      dockerfile: WebSearch/Dockerfile
+
