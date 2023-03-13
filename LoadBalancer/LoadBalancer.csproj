@@ -10,17 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.2" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
-    <ProjectReference Include="..\ConsoleSearch\ConsoleSearch.csproj" />
-    <ProjectReference Include="..\Indexer\Indexer.csproj" />
-    <ProjectReference Include="..\SearchAPI\SearchAPI.csproj" />
-    <ProjectReference Include="..\WebSearch\WebSearch.csproj" />
   </ItemGroup>
 
 </Project>

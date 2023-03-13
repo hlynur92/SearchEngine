@@ -1,5 +1,4 @@
 ﻿using LoadBalancer.LoadBlancer;
-using Newtonsoft.Json.Linq;
 using System.Xml.Linq;
 
 namespace LoadBalancer.Controllers

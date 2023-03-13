@@ -1,6 +1,4 @@
-﻿using Common;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Text;
 
 namespace LoadBalancer.Controllers
