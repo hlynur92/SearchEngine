@@ -47,8 +47,8 @@ namespace SearchAPI.Controllers
                 exitCode = process.ExitCode;
                 process.Close();
             }*/
-            var name = Dns.GetHostName(); // get container id
-            ip = Dns.GetHostEntry(name).AddressList.FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork);
+            /*var name = Dns.GetHostName(); // get container id
+            ip = Dns.GetHostEntry(name).AddressList.FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork);*/
 
         }
 
@@ -57,15 +57,11 @@ namespace SearchAPI.Controllers
 
             using (var httpClient = new HttpClient())
             {
-                httpClient.BaseAddress = new Uri(url + ip);
+                httpClient.BaseAddress = new Uri("http://localhost:5041");
                 //Yours string value.
-                var content = new FormUrlEncodedContent(new[]
-                {
-                    new KeyValuePair<string, string>("MyStringContent", "someString")
-                });
 
                 //Sending http post request.
-                response = await httpClient.PostAsync($"rest/of/apiadress/", content);
+                response = await httpClient.PostAsync(url, null);
             }
 
             //Here you save your response to Entity:
@@ -83,15 +79,15 @@ namespace SearchAPI.Controllers
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            fetchIpAddress();
-            notifyLoadBalancerAsync("http://localhost/RegisterService?ip=");
+            //fetchIpAddress();
+            notifyLoadBalancerAsync("/RegisterService");
 
             return Task.CompletedTask;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            notifyLoadBalancerAsync("http://localhost/RemoveService?ip=");
+            notifyLoadBalancerAsync("/RemoveService");
 
             return Task.CompletedTask;
         }

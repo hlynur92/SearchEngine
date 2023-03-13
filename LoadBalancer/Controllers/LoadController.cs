@@ -4,7 +4,7 @@ namespace LoadBalancer.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class LoadController
+    public class LoadController : Controller
     {
         LoadBalancer lb;
 
@@ -28,15 +28,17 @@ namespace LoadBalancer.Controllers
             return result;
         }
 
-        [HttpGet]
-        public void RegisterService(string ip)
+        [HttpPost]
+        public void RegisterService()
         {
+            var ip = HttpContext.Connection.RemoteIpAddress.ToString();
             lb.AddServices(ip);
         }
 
-        [HttpGet]
-        public void RemoveService(string ip)
+        [HttpPost]
+        public void RemoveService()
         {
+            var ip = HttpContext.Connection.RemoteIpAddress.ToString();
             //lb.RemoveServices(ip);
         }
     }
