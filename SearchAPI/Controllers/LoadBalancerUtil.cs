@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
+using System.Net;
 using System.Net.Http;
+using System.Net.Sockets;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Xml;
@@ -8,14 +10,14 @@ namespace SearchAPI.Controllers
 {
     public class LoadBalancerUtil : IHostedService
     {
-        private string ip;
+        private IPAddress ip;
         private HttpResponseMessage response;
 
         public void fetchIpAddress()
         {
             //Debug.WriteLine("run --name azurite -p 10000:10000 mcr.microsoft.com/azure-storage/azurite azurite-blob --blobHost 0.0.0.0");
             // Add services to the container.
-            var processInfo = new ProcessStartInfo("docker");
+            /*var processInfo = new ProcessStartInfo("docker", "inspect myubuntu | grep \"IPAddress\"");
             processInfo.CreateNoWindow = true;
             processInfo.UseShellExecute = false;
             processInfo.RedirectStandardOutput = true;
@@ -44,7 +46,10 @@ namespace SearchAPI.Controllers
                 }
                 exitCode = process.ExitCode;
                 process.Close();
-            }
+            }*/
+            var name = Dns.GetHostName(); // get container id
+            ip = Dns.GetHostEntry(name).AddressList.FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork);
+
         }
 
         public async void notifyLoadBalancerAsync(string url)
