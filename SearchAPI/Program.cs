@@ -6,8 +6,6 @@ using System.Runtime.CompilerServices;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-LoadBalancerUtil rsc = new LoadBalancerUtil();
-rsc.fetchIpAddress();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

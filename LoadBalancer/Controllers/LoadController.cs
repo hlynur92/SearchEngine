@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Text;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LoadBalancer.Controllers
 {
@@ -29,10 +28,16 @@ namespace LoadBalancer.Controllers
             return result;
         }
 
-        [HttpPost]
-        public string registerService(string service)
+        [HttpGet]
+        public void RegisterService(string ip)
         {
-            throw new NotImplementedException();
+            lb.AddServices(ip);
+        }
+
+        [HttpGet]
+        public void RemoveService(string ip)
+        {
+            //lb.RemoveServices(ip);
         }
     }
 }

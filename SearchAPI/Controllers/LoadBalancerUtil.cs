@@ -47,11 +47,12 @@ namespace SearchAPI.Controllers
             }
         }
 
-        public async void notifyLoadBalancerAsync()
+        public async void notifyLoadBalancerAsync(string url)
         {
+
             using (var httpClient = new HttpClient())
             {
-                httpClient.BaseAddress = new Uri("http://localhost/");
+                httpClient.BaseAddress = new Uri(url + ip);
                 //Yours string value.
                 var content = new FormUrlEncodedContent(new[]
                 {
@@ -78,14 +79,14 @@ namespace SearchAPI.Controllers
         public Task StartAsync(CancellationToken cancellationToken)
         {
             fetchIpAddress();
-            notifyLoadBalancerAsync();
+            notifyLoadBalancerAsync("http://localhost/RegisterService?ip=");
 
             return Task.CompletedTask;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            notifyLoadBalancerAsync();
+            notifyLoadBalancerAsync("http://localhost/RemoveService?ip=");
 
             return Task.CompletedTask;
         }
