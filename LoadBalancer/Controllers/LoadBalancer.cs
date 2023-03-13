@@ -4,8 +4,17 @@ namespace LoadBalancer.Controllers
 {
     public class LoadBalancer : ILoadBalancer
     {
+        private List<string> _services;
+
+        public LoadBalancer()
+        {
+            _services = new List<string>();
+        }
+
         public int AddServices(string url)
         {
+            _services.Add(url);
+
             throw new NotImplementedException();
         }
 
@@ -16,7 +25,7 @@ namespace LoadBalancer.Controllers
 
         public List<string> GetAllServices()
         {
-            throw new NotImplementedException();
+            return _services;
         }
 
         public string NextService()
@@ -26,11 +35,15 @@ namespace LoadBalancer.Controllers
 
         public int RemoveServices(int id)
         {
+            if(_services.Count != 0)
+                _services.RemoveAt(id);
+
             throw new NotImplementedException();
         }
 
         public void SetActiveStrategy(ILoadBalancerStrategy strategy)
         {
+
             throw new NotImplementedException();
         }
     }
