@@ -5,8 +5,7 @@ namespace SearchAPI.Controllers
 {
     public class RegisterServiceController
     {
-
-        public void registerService()
+        public void fetchIpAddress()
         {
             //Debug.WriteLine("run --name azurite -p 10000:10000 mcr.microsoft.com/azure-storage/azurite azurite-blob --blobHost 0.0.0.0");
             // Add services to the container.
