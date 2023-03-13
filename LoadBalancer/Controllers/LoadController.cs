@@ -28,18 +28,28 @@ namespace LoadBalancer.Controllers
             return result;
         }
 
-        [HttpPost]
-        public void RegisterService()
+        [HttpGet]        
+        public List<string> GetServices()
         {
-            var ip = HttpContext.Connection.RemoteIpAddress.ToString();
-            lb.AddServices(ip);
+            return lb.GetAllServices();
         }
 
         [HttpPost]
-        public void RemoveService()
+        public string RegisterService()
+        {
+            var ip = HttpContext.Connection.RemoteIpAddress.ToString();
+            lb.AddServices(ip);
+
+            return ip;
+        }
+
+        [HttpPost]
+        public string RemoveService()
         {
             var ip = HttpContext.Connection.RemoteIpAddress.ToString();
             //lb.RemoveServices(ip);
+
+            return ip;
         }
     }
 }

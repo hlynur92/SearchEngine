@@ -10,7 +10,6 @@ namespace SearchAPI.Controllers
 {
     public class LoadBalancerUtil : IHostedService
     {
-        private IPAddress ip;
         private HttpResponseMessage response;
 
         public void fetchIpAddress()
@@ -57,11 +56,11 @@ namespace SearchAPI.Controllers
 
             using (var httpClient = new HttpClient())
             {
-                httpClient.BaseAddress = new Uri("http://localhost:5041");
+                httpClient.BaseAddress = new Uri("loadBalancer-1");
                 //Yours string value.
 
                 //Sending http post request.
-                response = await httpClient.PostAsync(url, null);
+                var response = await httpClient.PostAsync(url, null);
             }
 
             //Here you save your response to Entity:
