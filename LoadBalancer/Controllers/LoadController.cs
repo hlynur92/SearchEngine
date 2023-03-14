@@ -35,13 +35,35 @@ namespace LoadBalancer.Controllers
             return lb.GetAllServices();
         }
 
+        [HttpPost("SetActiveStrategy")]
+        public string SetActiveStrategy(string strategy)
+        {
+            if (strategy == "roundrobin")
+            {
+                lb.SetActiveStrategy(new RoundRobin());
+
+                return "success";
+            }
+            if (strategy == "leastconnections")
+            {
+                lb.SetActiveStrategy(new LeastConnections());
+
+                return "success";
+            }
+            else
+            {
+                return "fail";
+            }
+
+        }
+
         [HttpPost("RegisterServices")]
         public string RegisterService()
         {
             var ip = HttpContext.Connection.RemoteIpAddress.ToString();
             lb.AddServices(ip);
 
-            return ip;
+            return "success";
         }
 
         [HttpPost("RemoveServices")]
@@ -50,7 +72,7 @@ namespace LoadBalancer.Controllers
             var ip = HttpContext.Connection.RemoteIpAddress.ToString();
             //lb.RemoveServices(ip);
 
-            return ip;
+            return "success";
         }
     }
 }
