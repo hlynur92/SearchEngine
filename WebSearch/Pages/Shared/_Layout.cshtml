@@ -34,7 +34,25 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+
+        <div class="form-group">
+            <form name="strategy-form" style="text-align:center" method="post">
+                <select id="strategy" name="strategy">
+                    <option value="roundrobin">Round Robin</option>
+                    <option value="leastconnections">Least Connections</option>
+                </select>
+                <button id="submit-option">Submit</button>
+            </form>
+            <br />
+            <form name="search-form" style="text-align:center" method="get">
+                <input type="text" id="search" name="search"/>
+                <button id="submit-search">Submit</button>
+                <div id="display-search"></div>
+            </form>
+        </div>
+
     </div>
+
 
     <footer class="border-top footer text-muted">
         <div class="container">
