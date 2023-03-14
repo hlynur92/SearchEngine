@@ -43,7 +43,6 @@ namespace LoadBalancer.Controllers
 
         public void SetActiveStrategy(ILoadBalancerStrategy strategy)
         {
-
             throw new NotImplementedException();
         }
     }

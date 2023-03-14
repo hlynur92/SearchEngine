@@ -1,3 +1,4 @@
+using LoadBalancer.LoadBlancer;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoadBalancer.Controllers
@@ -6,14 +7,14 @@ namespace LoadBalancer.Controllers
     [Route("[controller]")]
     public class LoadController : Controller
     {
-        LoadBalancer lb;
+        ILoadBalancer lb;
 
-        public LoadController(LoadBalancer lb)
+        public LoadController(ILoadBalancer lb)
         {
             this.lb = lb;
         }
 
-        [HttpGet]
+        [HttpGet("Search")]
         public string Search(string terms, int numberOfResults)
         {
             HttpClient api = new HttpClient();
@@ -28,13 +29,13 @@ namespace LoadBalancer.Controllers
             return result;
         }
 
-        [HttpGet]        
+        [HttpGet("GetServices")]        
         public List<string> GetServices()
         {
             return lb.GetAllServices();
         }
 
-        [HttpPost]
+        [HttpPost("RegisterServices")]
         public string RegisterService()
         {
             var ip = HttpContext.Connection.RemoteIpAddress.ToString();
@@ -43,7 +44,7 @@ namespace LoadBalancer.Controllers
             return ip;
         }
 
-        [HttpPost]
+        [HttpPost("RemoveServices")]
         public string RemoveService()
         {
             var ip = HttpContext.Connection.RemoteIpAddress.ToString();

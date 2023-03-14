@@ -7,7 +7,7 @@ me.timeUsed = ko.observable();
 
 me.search = function () {
     $.ajax({
-        url: "http://localhost:5041/search?terms=" + me.searchTerms() + "&numberOfResults=10",
+        url: "http://loadbalancer-1/Load/search?terms=" + me.searchTerms() + "&numberOfResults=10",
         success: function (data) {
             me.hits(data.documents.length);
             me.timeUsed(data.elapsedMilliseconds);

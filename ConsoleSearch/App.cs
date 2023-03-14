@@ -12,7 +12,7 @@ namespace ConsoleSearch
         public void Run()
         {
             HttpClient api = new HttpClient();
-            api.BaseAddress = new Uri("http://localhost:5041");
+            api.BaseAddress = new Uri("http://loadbalancer-1");
             //SearchLogic mSearchLogic = new SearchLogic(new Database());
             Console.WriteLine("Console Search");
             
@@ -22,7 +22,7 @@ namespace ConsoleSearch
                 string input = Console.ReadLine() ?? string.Empty;
                 if (input.Equals("q")) break;
 
-                Task<string> task = api.GetStringAsync("/Search?terms=" + input + "&numberOfResults=10");
+                Task<string> task = api.GetStringAsync("/Load/Search?terms=" + input + "&numberOfResults=10");
                 task.Wait();
                 string resultString = task.Result;
 
