@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Net.Sockets;
@@ -53,27 +54,33 @@ namespace SearchAPI.Controllers
 
         public async void notifyLoadBalancerAsync(string url)
         {
-
-            using (var httpClient = new HttpClient())
+            do
             {
-                httpClient.BaseAddress = new Uri("loadBalancer-1");
-                //Yours string value.
+               Thread.Sleep(5000);
+               using (var httpClient = new HttpClient())
+                {
+                    httpClient.BaseAddress = new Uri("http://loadbalancer-1");
+                    //Yours string value.
 
-                //Sending http post request.
-                var response = await httpClient.PostAsync(url, null);
-            }
-
+                    //Sending http post request.
+                    response = await httpClient.PostAsync(url, null);
+                }
+            } while (response.StatusCode != HttpStatusCode.OK);
+            
+            /*
             //Here you save your response to Entity:
             var contentStream = await response.Content.ReadAsStreamAsync();
 
             //Options to mach yours naming styles.
-            /*var options = new JsonSerializerOptions
+            var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
-            };*/
+            };
 
             //Here you go. Yours response as an entity:
             var result = await JsonSerializer.DeserializeAsync<string>(contentStream);
+            */
+
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
