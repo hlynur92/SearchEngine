@@ -18,15 +18,18 @@ namespace LoadBalancer.Controllers
         public string Search(string terms, int numberOfResults)
         {
             HttpClient api = new HttpClient();
+            string service = lb.NextService();
+            api.BaseAddress = new Uri(service);
 
-            api.BaseAddress = new Uri(lb.NextService());
+            if (lb.GetActiveStrategy() is LeastConnections) ((LeastConnections)lb.GetActiveStrategy()).AddActiveConnection(service);
 
             var task = api.GetStringAsync("/Load/Search?terms=" + terms + "&numberOfResults=" + numberOfResults);
             task.Wait();
 
-            var result = task.Result;
+            if (lb.GetActiveStrategy() is LeastConnections) ((LeastConnections)lb.GetActiveStrategy()).RemoveActiveConnection(service);
 
-            return result;
+
+            return task.Result;
         }
 
         [HttpGet("GetServices")]        

@@ -19,9 +19,17 @@ namespace LoadBalancer.Controllers
 
             string m_service = service_connection_tracking.MinBy(kvp => kvp.Value).Key;
 
-
-
             return m_service;
+        }
+
+        public void AddActiveConnection(string service)
+        {
+            service_connection_tracking[service] += 1;
+        }
+
+        public void RemoveActiveConnection(string service)
+        {
+            service_connection_tracking[service] = service_connection_tracking[service] > 0 ? service_connection_tracking[service] - 1 : 0;
         }
     }
 }
