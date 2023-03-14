@@ -5,9 +5,11 @@ namespace LoadBalancer.Controllers
     public class LoadBalancer : ILoadBalancer
     {
         private List<string> _services;
+        private ILoadBalancerStrategy _activeStrategy;
 
         public LoadBalancer()
         {
+            ILoadBalancerStrategy activeStrategy = new RoundRobin();
             _services = new List<string>();
         }
 
@@ -20,7 +22,7 @@ namespace LoadBalancer.Controllers
 
         public ILoadBalancerStrategy GetActiveStrategy()
         {
-            throw new NotImplementedException();
+            return _activeStrategy;
         }
 
         public List<string> GetAllServices()
@@ -43,7 +45,7 @@ namespace LoadBalancer.Controllers
 
         public void SetActiveStrategy(ILoadBalancerStrategy strategy)
         {
-            throw new NotImplementedException();
+            _activeStrategy = strategy;
         }
     }
 }
