@@ -9,7 +9,7 @@ namespace LoadBalancer.Controllers
 
         public LoadBalancer()
         {
-            ILoadBalancerStrategy activeStrategy = new RoundRobin();
+            _activeStrategy = new RoundRobin();
             _services = new List<string>();
         }
 
@@ -17,7 +17,7 @@ namespace LoadBalancer.Controllers
         {
             _services.Add(url);
 
-            throw new NotImplementedException();
+            return _services.IndexOf(url); //Return index?
         }
 
         public ILoadBalancerStrategy GetActiveStrategy()
@@ -32,15 +32,15 @@ namespace LoadBalancer.Controllers
 
         public string NextService()
         {
-            throw new NotImplementedException();
+            return _activeStrategy.NextService(_services);
         }
 
         public int RemoveServices(int id)
         {
             if(_services.Count != 0)
                 _services.RemoveAt(id);
-
-            throw new NotImplementedException();
+            
+            return id; //Return index ?
         }
 
         public void SetActiveStrategy(ILoadBalancerStrategy strategy)

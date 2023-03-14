@@ -21,7 +21,7 @@ namespace LoadBalancer.Controllers
 
             api.BaseAddress = new Uri(lb.NextService());
 
-            var task = api.GetStringAsync("/Search?terms=" + terms + "&numberOfResults=" + numberOfResults);
+            var task = api.GetStringAsync("/Load/Search?terms=" + terms + "&numberOfResults=" + numberOfResults);
             task.Wait();
 
             var result = task.Result;
