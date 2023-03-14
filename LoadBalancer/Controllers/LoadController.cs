@@ -20,15 +20,13 @@ namespace LoadBalancer.Controllers
             HttpClient api = new HttpClient();
             string service = lb.NextService();
             api.BaseAddress = new Uri(service);
+            var strategy = lb.GetActiveStrategy();
+            bool isLeastConnections = strategy is LeastConnections;
 
-            if (lb.GetActiveStrategy() is LeastConnections) ((LeastConnections)lb.GetActiveStrategy()).AddActiveConnection(service);
-
+            if (isLeastConnections) ((LeastConnections)strategy).AddActiveConnection(service);
             var task = api.GetStringAsync("/Load/Search?terms=" + terms + "&numberOfResults=" + numberOfResults);
             task.Wait();
-
-            if (lb.GetActiveStrategy() is LeastConnections) ((LeastConnections)lb.GetActiveStrategy()).RemoveActiveConnection(service);
-
-
+            if (isLeastConnections) ((LeastConnections)strategy).RemoveActiveConnection(service);
             return task.Result;
         }
 

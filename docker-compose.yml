@@ -14,12 +14,17 @@ services:
       dockerfile: SearchAPI/Dockerfile
     volumes:
       - D:/Main/DockerVolumes:/data
-    deploy:
-      mode: replicated
-      replicas: 3
+
   websearch:
     image: ${DOCKER_REGISTRY-}websearch
     build:
       context: .
       dockerfile: WebSearch/Dockerfile
+
+
+  webclient:
+    image: ${DOCKER_REGISTRY-}webclient
+    build:
+      context: .
+      dockerfile: WebClient/Dockerfile
 
