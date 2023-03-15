@@ -20,7 +20,7 @@ namespace SearchAPI.Controllers
                Thread.Sleep(5000);
                using (var httpClient = new HttpClient())
                 {
-                    httpClient.BaseAddress = new Uri("http://loadbalancer-1");
+                    httpClient.BaseAddress = new Uri("http://searchengine-loadbalancer-1");
                     //Yours string value.
 
                     //Sending http post request.

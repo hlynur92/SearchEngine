@@ -6,7 +6,6 @@
       "serviceActions": {
         "loadbalancer": "StartDebugging",
         "searchapi": "StartDebugging",
-        "websearch": "StartDebugging",
         "webclient": "StartDebugging"
       }
     }

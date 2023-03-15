@@ -11,6 +11,8 @@ namespace SearchAPI.Controllers
         [HttpGet]
         public async Task<SearchResult> Search(string terms, int numberOfResults)
         {
+            Console.WriteLine("Received search request for: "+terms);
+
             var mSearchLogic = new SearchLogic(new Database());
             var result = new SearchResult();
 

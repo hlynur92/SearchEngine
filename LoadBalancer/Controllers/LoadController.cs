@@ -19,12 +19,12 @@ namespace LoadBalancer.Controllers
         {
             HttpClient api = new HttpClient();
             string service = lb.NextService();
-            api.BaseAddress = new Uri(service);
+            api.BaseAddress = new Uri("http://"+service);
             var strategy = lb.GetActiveStrategy();
             bool isLeastConnections = strategy is LeastConnections;
 
             if (isLeastConnections) ((LeastConnections)strategy).AddActiveConnection(service);
-            var task = api.GetStringAsync("/Load/Search?terms=" + terms + "&numberOfResults=" + numberOfResults);
+            var task = api.GetStringAsync("/Search?terms=" + terms + "&numberOfResults=" + numberOfResults);
             task.Wait();
             if (isLeastConnections) ((LeastConnections)strategy).RemoveActiveConnection(service);
             return task.Result;
@@ -58,19 +58,19 @@ namespace LoadBalancer.Controllers
 
         }
 
-        [HttpPost("RegisterServices")]
+        [HttpGet("RegisterServices")]
         public string RegisterService()
         {
-            var ip = HttpContext.Connection.RemoteIpAddress.ToString();
+            var ip = HttpContext.Connection.RemoteIpAddress.ToString().Replace("::ffff:", "");
             lb.AddServices(ip);
 
             return "success";
         }
 
-        [HttpPost("RemoveServices")]
+        [HttpGet("RemoveServices")]
         public string RemoveService()
         {
-            var ip = HttpContext.Connection.RemoteIpAddress.ToString();
+            var ip = HttpContext.Connection.RemoteIpAddress.ToString().Replace("::ffff:", "");
             //lb.RemoveServices(ip);
 
             return "success";

@@ -23,11 +23,14 @@ namespace LoadBalancer.Controllers
         public void AddActiveConnection(string service)
         {
             service_connection_tracking[service] += 1;
+            Console.WriteLine("Added active connection for "+service+". Active Connections: "+ service_connection_tracking[service]);
         }
         public void RemoveActiveConnection(string service)
         {
             int curr_val = service_connection_tracking[service];
             service_connection_tracking[service] = curr_val > 0 ? curr_val - 1 : 0;
+
+            Console.WriteLine("Removed active connection for " + service + ". Active Connections: " + service_connection_tracking[service]);
         }
     }
 }

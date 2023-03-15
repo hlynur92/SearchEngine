@@ -9,7 +9,7 @@ namespace LoadBalancer.Controllers
 
         public LoadBalancer()
         {
-            _activeStrategy = new RoundRobin();
+            _activeStrategy = new LeastConnections();
             _services = new List<string>();
         }
 
@@ -46,6 +46,7 @@ namespace LoadBalancer.Controllers
         public void SetActiveStrategy(ILoadBalancerStrategy strategy)
         {
             _activeStrategy = strategy;
+            Console.WriteLine("Set Active Strategy: " + strategy.GetType().Name);
         }
     }
 }

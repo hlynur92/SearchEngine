@@ -41,14 +41,20 @@ function handleSearch(event) {
     showSearch.innerText = `You have searched for: ${inputBox.value}`
 
     //HTTP Request
-    fetch("https://loadbalancer-1/Load/Search?terms=" + inputBox.value + "&numberOfResults=10", {
+    fetch(window.location.origin + "/Home/Search?terms=" + inputBox.value + "&numberOfResults=10", {
         method: "GET",
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
     })
-        .then((response) => response.json())
-        .then((json) => console.log(json));
+        .then((response) => {
+            console.log(response);
+            response.json().then((mjson) => {
+                console.log('my json', mjson);
+            })
+            
+        })
+        
 }
 
 // Function to display selected value on screen
@@ -57,7 +63,7 @@ function handleSubmit(event) {
     var selectedOption = document.forms['strategy-form'].strategy;
 
     //HTTP Request
-    fetch("https://loadbalancer-1/Load/SetActiveStrategy", {
+    fetch(window.location.origin + "/Home/SetActiveStrategy", {
         method: "POST",
         body: JSON.stringify({
             strategy: selectedOption.value,
